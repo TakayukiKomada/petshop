@@ -1,8 +1,15 @@
+<?php
+require_once __DIR__ . '/functions.php';
+
+// index.php から渡された id を受け取る
+$id = filter_input(INPUT_GET, 'id');
+
+// 受け取った id のレコードを取得
+$task = find_by_id($id);
+?>
 <!DOCTYPE html>
 <html lang="ja">
-
 <?php include_once __DIR__ . '/_head.html' ?>
-
 <body>
     <div class="wrapper">
         <header class="header-task">
@@ -15,7 +22,7 @@
                 <li>タスク名を入力してください</li>
             </ul>
             <form action="" method="post">
-                <input type="text" name="title" placeholder="タスクを入力してください">
+                <input type="text" name="title" value="<?= h($task['title']) ?>">
                 <div class="update-btn-group">
                     <button type="submit" class="big-btn update-btn">
                         <span>Update</span>
