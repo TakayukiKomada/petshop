@@ -1,10 +1,7 @@
 <?php
 require_once __DIR__ . '/functions.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $keyword = filter_input(INPUT_GET, 'keyword');
-    $search_info = get_info($keyword);
-}
+$get_info = get_info();
 
 ?>
 
@@ -19,13 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 </head>
 
 <body>
-    <h2>本日のご紹介ペット!</h2>
-    <form action="" method="get">キーワード:
-        <input type="search" name="keyword" placeholder="キーワードの入力">
-        <input type="submit" value="検索">
-    </form>
+    <h2>本日のご紹介ペット！</h2>
     <ul>
-        <?php foreach ($search_info as $animal) : ?>
+        <?php foreach ($get_info as $animal) : ?>
             <?= h($animal['type'] . "の" . $animal['classification'] . "ちゃん")  ?><br>
             <?= h($animal['description'])  ?><br>
             <?= h($animal['birthday'] . "生まれ")  ?><br>
