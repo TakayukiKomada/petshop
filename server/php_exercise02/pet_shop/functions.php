@@ -44,3 +44,27 @@ function get_info()
     $animals = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $animals;
 }
+function select_animals($keyword)
+{
+    $dbh = connect_db();
+
+    $sql = <<<EOM
+    SELECT
+    *
+    FROM
+    animals
+    WHERE
+    description LIKE :keyword;
+    EOM;
+
+    $keyword_param = '%'.$keyword.'%';
+
+    $stmt = $dbh->prepare($sql);
+
+    $stmt ->bindValue(':keyword',$keyword_param,PDO::PARAM_STR);
+
+    $stmt->execute();
+
+    $select_animals = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $select_animals;
+}

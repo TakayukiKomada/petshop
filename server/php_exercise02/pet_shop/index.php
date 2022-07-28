@@ -3,9 +3,8 @@ require_once __DIR__ . '/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $keyword = filter_input(INPUT_GET, 'keyword');
-    $search_info = get_info($keyword);
+    $search_info = select_animals($keyword);
 }
-
 ?>
 
 <!DOCTYPE html>
